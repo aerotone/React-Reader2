@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
-import * as ReactBootstrap from 'react-bootstrap';
-import logo from './logo.svg';
+import * as BooksAPI from './utils/BooksAPI';
+import ListBooks from './ListBooks';
+import { Container } from 'reactstrap';
 import './App.css';
 
 class App extends Component {
+
+  state = {
+    books: []
+  }
+
+  componentDidMount(){
+    BooksAPI.getAll().then((books) => {
+      this.setState({books})
+    })
+  }
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React2</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <ReactBootstrap.Button bsStyle="primary" bsSize="small">
-          Something
-        </ReactBootstrap.Button>
+        <Container>
+            <ListBooks books={this.state.books}/>
+        </Container>
       </div>
     );
   }
