@@ -5,12 +5,7 @@ import ShelfChangeButton from './ShelfChangeButton';
 
 class SingleBook extends Component{
     
-    handleClick = (id, shelf) => {
-        this.props.onMoveBook(id, shelf)
-    }
-    handleAddClick = (bookInfo, shelf) => {
-        this.props.onAddBook(bookInfo, shelf)
-    }
+    
     render() {
         return(
             <Card>
@@ -22,9 +17,10 @@ class SingleBook extends Component{
                         <SingleAuthor authors={this.props.bookInfo.authors}/>
                     )}
                 </CardSubtitle>
-                <CardText></CardText>
-                <Button className="primary" onClick={() => this.handleClick(this.props.bookInfo.id, 'currentlyReading')} >Move to Current</Button>
-                <Button className="primary" onClick={() => this.handleAddClick(this.props.bookInfo, 'currentlyReading')} >Add</Button>
+                <CardText>
+                    <ShelfCheck shelfBooks={this.props.shelfBooks} bookInfo={this.props.bookInfo} /> 
+                </CardText>
+                <ShelfChangeButton onMoveBook={this.props.onMoveBook} bookInfo={this.props.bookInfo}/>
             </CardBlock>
         </Card>
         )
@@ -32,10 +28,25 @@ class SingleBook extends Component{
 }
 
 function SingleAuthor(props){
+
     let oneAuthor = props.authors[0];
     return(
          <span>{oneAuthor}</span>
     );
+    
+}
+
+function ShelfCheck(props){
+    
+    for (var i = 0; i < props.shelfBooks.length; i++){
+        var item = props.shelfBooks[i].id;
+        if (item === props.bookInfo.id){
+            return (
+            <span>{props.shelfBooks[i].shelf}</span>
+            );
+        }
+    }
+    return (<span>none</span>);
 }
 
 export default SingleBook

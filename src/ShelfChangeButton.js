@@ -16,17 +16,22 @@ class ShelfChangeButton extends React.Component {
       dropdownOpen: !this.state.dropdownOpen
     });
   }
-
+  handleMoveClick = (id, shelf) => {
+    this.props.onMoveBook(id, shelf)
+  }
+  handleAddClick = (bookInfo, shelf) => {
+    this.props.onAddBook(bookInfo, shelf)
+  }
   render() {
     return (
       <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} size="sm">
         <DropdownToggle caret>
-          Shelf
+          Change Shelf
         </DropdownToggle>
         <DropdownMenu>
-          <DropdownItem>Another Action</DropdownItem>
-          <DropdownItem>Another Action</DropdownItem>
-          <DropdownItem>Another Action</DropdownItem>
+          <DropdownItem onClick={() => this.handleMoveClick(this.props.bookInfo, 'wantToRead')}>Want to Read</DropdownItem>
+          <DropdownItem onClick={() => this.handleMoveClick(this.props.bookInfo, 'currentlyReading')}>Currently Reading</DropdownItem>
+          <DropdownItem onClick={() => this.handleMoveClick(this.props.bookInfo, 'read')}>Already Read</DropdownItem>
         </DropdownMenu>
       </Dropdown>
     )

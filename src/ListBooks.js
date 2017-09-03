@@ -5,7 +5,6 @@ import SingleBook from './SingleBook';
 
 class ListBooks extends Component {
     render(){
-        // console.log(this.props.onMoveBook)
         return(
                <div>
                    <Row>
@@ -15,11 +14,11 @@ class ListBooks extends Component {
                     <h2>Currently Reading</h2>
                    </Row>
                    <Row>
-                    {this.props.books
+                    {this.props.shelfBooks
                     .filter((book) => book.shelf === 'currentlyReading')
                     .map((book) => (
                         <Col sm="3" key={book.id}>
-                            <SingleBook onMoveBook={this.props.onMoveBook} bookInfo={book}/>
+                            <SingleBook onMoveBook={this.props.onMoveBook} bookInfo={book} shelfBooks={this.props.shelfBooks}/>
                         </Col>
                     ))}
                     </Row>
@@ -27,11 +26,11 @@ class ListBooks extends Component {
                         <h2>Want to Read</h2>
                     </Row>
                     <Row>
-                    {this.props.books
+                    {this.props.shelfBooks
                     .filter((book) => book.shelf === 'wantToRead')
                     .map((book) => (
                         <Col sm="3" key={book.id}>
-                            <SingleBook onMoveBook={this.props.onMoveBook} bookInfo={book}/>
+                            <SingleBook onMoveBook={this.props.onMoveBook} bookInfo={book} shelfBooks={this.props.shelfBooks}/>
                         </Col>
                     ))}
                     </Row>
@@ -39,11 +38,11 @@ class ListBooks extends Component {
                         <h2>Have Read</h2>
                     </Row>
                     <Row>
-                    {this.props.books
+                    {this.props.shelfBooks
                     .filter((book) => book.shelf === 'read')
                     .map((book) => (
                         <Col sm="3" key={book.id}>
-                            <SingleBook onMoveBook={this.props.onMoveBook} bookInfo={book}/>
+                            <SingleBook onMoveBook={this.props.onMoveBook} bookInfo={book} shelfBooks={this.props.shelfBooks}/>
                         </Col>
                     ))}
                     </Row>

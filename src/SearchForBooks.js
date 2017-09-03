@@ -45,7 +45,7 @@ class SearchForBooks extends Component {
                     this.props.allBooks
                     .map((book) => (
                         <Col sm="3" key={book.id}>
-                            <SingleBook onAddBook={this.props.onAddBook} onMoveBook={this.props.onMoveBook} bookInfo={book} />
+                            <SingleBook onMoveBook={this.props.onMoveBook} bookInfo={book} shelfBooks={this.props.shelfBooks}/>
                         </Col>
                     ))
                 )}

@@ -20,26 +20,23 @@ class App extends Component {
   }
 
   moveBook = ( book, shelf ) => {
+
+    book.shelf = shelf
+    this.setState(state => ({
+      books: state.books.concat([ book ])
+    }))
+ 
     this.setState((state) => ({
       books: state.books.filter(function(item){
-        if (item.id === book){
+        if (item.id === book.id){
           item.shelf = shelf;
           return item;
         }
         return item;
       })
     }))
-    BooksAPI.update(book, shelf)
   }
-addBook = ( book, shelf ) => {
-  book.shelf = shelf
-  this.setState(state => ({
-    books: state.books.concat([ book ])
-  }))
-  BooksAPI.update(book, shelf).then((books) => {
-    this.getBooks()
-  })
-}
+
 
   searchBooks = ( searchQuery, maxResults) => {
     BooksAPI.search(searchQuery, maxResults).then((allBooks) => {
@@ -56,15 +53,15 @@ addBook = ( book, shelf ) => {
       <div className="App">
         <Container>
         <Route exact path="/" render={() => (
-            <ListBooks books={this.state.books} onMoveBook={this.moveBook}/>
+            <ListBooks 
+              shelfBooks={this.state.books} 
+              onCheckShelves={this.checkShelves}
+              onMoveBook={this.moveBook}/>
           )} />
           <Route path="/search" render={( { history } ) => (
             <SearchForBooks
               allBooks={this.state.allBooks}
-              onAddBook={(bookInfo, shelf) => {
-                this.addBook(bookInfo, shelf)
-               // history.push('/')
-              }}
+              shelfBooks={this.state.books}
               onMoveBook={this.moveBook}
               onSearchBooks={(bookTitle, maxResults) => {
                 this.searchBooks(bookTitle, maxResults)
