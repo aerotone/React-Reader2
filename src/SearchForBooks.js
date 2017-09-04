@@ -10,7 +10,6 @@ import SingleBook from './SingleBook';
 class SearchForBooks extends Component {
 
     static propTypes = {
-        allBooks: PropTypes.array.isRequired,
         onMoveBook: PropTypes.func.isRequired
     }
 
@@ -41,7 +40,10 @@ class SearchForBooks extends Component {
                         />
                 </Row>
                 <Row>
-                    {this.props.allBooks && (
+                    {this.state.query === '' &&
+                        (<span>Type some text into the search input to begin...</span>)
+                    }
+                    {(this.state.query !== '' && this.props.allBooks !== undefined && this.props.allBooks.length >= 0) && (
                         this.props.allBooks
                         .map((book) => (
                             <Col sm="3" key={book.id}>
