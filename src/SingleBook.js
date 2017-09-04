@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { Card, CardImg, CardText, CardBlock,
-    CardTitle, CardSubtitle, Button } from 'reactstrap';
+import { Card, CardImg, CardBlock,
+    CardTitle, CardSubtitle } from 'reactstrap';
+import PropTypes from 'prop-types'
 import ShelfChangeButton from './ShelfChangeButton';
 
 class SingleBook extends Component{
-    
-    
+    static PropTypes = {
+        bookInfo: PropTypes.array.isRequired,
+    }
     render() {
         return(
             <Card>
@@ -17,10 +19,7 @@ class SingleBook extends Component{
                         <SingleAuthor authors={this.props.bookInfo.authors}/>
                     )}
                 </CardSubtitle>
-                <CardText>
-                    <ShelfCheck shelfBooks={this.props.shelfBooks} bookInfo={this.props.bookInfo} /> 
-                </CardText>
-                <ShelfChangeButton onMoveBook={this.props.onMoveBook} bookInfo={this.props.bookInfo}/>
+                <ShelfChangeButton shelfBooks={this.props.shelfBooks} onMoveBook={this.props.onMoveBook} bookInfo={this.props.bookInfo}/>
             </CardBlock>
         </Card>
         )
@@ -33,20 +32,7 @@ function SingleAuthor(props){
     return(
          <span>{oneAuthor}</span>
     );
-    
-}
 
-function ShelfCheck(props){
-    
-    for (var i = 0; i < props.shelfBooks.length; i++){
-        var item = props.shelfBooks[i].id;
-        if (item === props.bookInfo.id){
-            return (
-            <span>{props.shelfBooks[i].shelf}</span>
-            );
-        }
-    }
-    return (<span>none</span>);
 }
 
 export default SingleBook
