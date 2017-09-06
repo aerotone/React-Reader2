@@ -11,17 +11,17 @@ class SingleBook extends Component{
     render() {
         return(
             <Card>
-            <CardImg top width="100%" src={this.props.bookInfo.imageLinks.smallThumbnail} alt="Card image cap" />
-            <CardBlock>
-                <CardTitle>{this.props.bookInfo.title}</CardTitle>
-                <CardSubtitle>
-                    { this.props.bookInfo.authors && (
-                        <SingleAuthor authors={this.props.bookInfo.authors}/>
-                    )}
-                </CardSubtitle>
-                <ShelfChangeButton shelfBooks={this.props.shelfBooks} onMoveBook={this.props.onMoveBook} bookInfo={this.props.bookInfo}/>
-            </CardBlock>
-        </Card>
+                <CardImg top width="100%" height="100%" src={this.props.bookInfo.imageLinks.smallThumbnail} alt="Card image cap" />
+                <CardBlock>
+                    <CardTitle>{this.props.bookInfo.title}</CardTitle>
+                    <CardSubtitle>
+                        { this.props.bookInfo.authors && (
+                            <SingleAuthor authors={this.props.bookInfo.authors}/>
+                        )}
+                    </CardSubtitle>
+                    <ShelfChangeButton shelfBooks={this.props.shelfBooks} onMoveBook={this.props.onMoveBook} bookInfo={this.props.bookInfo}/>
+                </CardBlock>
+            </Card>
         )
     }
 }

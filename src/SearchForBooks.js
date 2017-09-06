@@ -18,7 +18,7 @@ class SearchForBooks extends Component {
     }
     updateQuery = (query) => {
         this.setState({query: query.trim()})
-        this.props.onSearchBooks(this.state.query, 20)
+        this.props.onSearchBooks(query.trim(), 20)
     }
     clearQuery = () => {
         this.setState({ query: '' })
@@ -27,6 +27,7 @@ class SearchForBooks extends Component {
     render(){
         return(
             <div>
+                <br/>
                 <Row>
                     <Link to="/">Back</Link>
                 </Row>
@@ -40,8 +41,15 @@ class SearchForBooks extends Component {
                         />
                 </Row>
                 <Row>
+                    {(this.state.query !== '' && this.props.allBooks !== undefined && this.props.allBooks.length >= 0) && (
+                        <div>
+                            <h2>Displaying <span>{this.props.allBooks.length} </span>search results for<span> "{this.state.query}"</span></h2>
+                        </div>)
+                    }
+                </Row>
+                <Row>
                     {this.state.query === '' &&
-                        (<span>Type some text into the search input to begin...</span>)
+                        (<div><br/><span>Type some text into the search input to begin...</span></div>)
                     }
                     {(this.state.query !== '' && this.props.allBooks !== undefined && this.props.allBooks.length >= 0) && (
                         this.props.allBooks

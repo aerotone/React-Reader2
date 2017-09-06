@@ -22,24 +22,23 @@ class App extends Component {
   moveBook = ( book, shelf ) => {
 
     book.shelf = shelf
-    this.setState(state => ({
-      books: state.books.concat([ book ])
-    }))
- 
-    this.setState((state) => ({
-      books: state.books.filter(function(item){
-        if (item.id === book.id){
-          item.shelf = shelf;
-          return item;
-        }
-        return item;
-      })
-    }))
-  }
 
+    this.setState(function (state){
+      let list1 = state.books.filter((tbook) => book.id !== tbook.id)
+      let list2 = list1.concat([book])
+      return {
+        books: list2
+      }
+    })
+
+    BooksAPI.update(book, shelf)
+  }
 
   searchBooks = ( searchQuery, maxResults) => {
     BooksAPI.search(searchQuery, maxResults).then((allBooks) => {
+      if (searchQuery === '') {
+        allBooks = []
+      }
       this.setState({allBooks});
     })
   }
