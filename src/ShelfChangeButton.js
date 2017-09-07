@@ -1,55 +1,40 @@
 import React from 'react';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 class ShelfChangeButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      dropdownOpen: false
-    };
-  }
 
-  toggle() {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen
-    });
-  }
-  handleMoveClick = (id, shelf) => {
+  handleMoveClick = (id, shelf, shelfBooks, bookInfo) => {
     this.props.onMoveBook(id, shelf)
   }
   
-  shelfCheck(shelfBooks, bookInfo, optionID){
+  shelfCheck(shelfBooks, bookInfo){
 
     for (var i = 0; i < shelfBooks.length; i++){
         var item = shelfBooks[i].id;
         if (item === bookInfo.id){
-            if (shelfBooks[i].shelf === optionID){
                 return (
-                    <i className="fa fa-check" aria-hidden="true"></i>
+                    shelfBooks[i].shelf
                 );
-            }
+           // }
         }
     }
     return (
-        <i className="fa fa-square-o" aria-hidden="true"></i>
+        'none'
     );
-
 }
 
   render() {
     return (
-      <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} size="sm">
-        <DropdownToggle caret>
-          Change Shelf
-        </DropdownToggle>
-        <DropdownMenu>
-          <DropdownItem onClick={() => this.handleMoveClick(this.props.bookInfo, 'wantToRead')}>{this.shelfCheck(this.props.shelfBooks,this.props.bookInfo, 'wantToRead')} Want to Read</DropdownItem>
-          <DropdownItem onClick={() => this.handleMoveClick(this.props.bookInfo, 'currentlyReading')}>{this.shelfCheck(this.props.shelfBooks,this.props.bookInfo, 'currentlyReading')} Currently Reading</DropdownItem>
-          <DropdownItem onClick={() => this.handleMoveClick(this.props.bookInfo, 'read')}>{this.shelfCheck(this.props.shelfBooks,this.props.bookInfo, 'read')} Read</DropdownItem>
-          <DropdownItem onClick={() => this.handleMoveClick(this.props.bookInfo, 'none')}>{this.shelfCheck(this.props.shelfBooks,this.props.bookInfo, 'none')} None</DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
+    
+    <div className="book-shelf-changer">
+        <br/>
+        <select value={this.shelfCheck(this.props.shelfBooks, this.props.bookInfo)} 
+    onChange={(event) => this.props.onMoveBook(this.props.bookInfo, event.target.value, this.props.shelfBooks, this.props.bookInfo)}>
+        <option value="none" disabled>Move to...</option>
+        <option value="currentlyReading">Currently Reading</option>
+        <option value="wantToRead">Want to Read</option>
+        <option value="read">Read</option>
+        </select>
+    </div>
     )
   }
 }

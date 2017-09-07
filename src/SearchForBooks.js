@@ -31,6 +31,7 @@ class SearchForBooks extends Component {
                 <Row>
                     <Link to="/">Back</Link>
                 </Row>
+                <br/>
                 <Row>
                     <input 
                         className=''

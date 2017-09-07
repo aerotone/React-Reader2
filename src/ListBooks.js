@@ -7,8 +7,9 @@ class ListBooks extends Component {
     render(){
         return(
                <div>
+                   <br/>
                    <Row>
-                        <Link to="/Search">Search</Link>
+                        <Link to="/Search">Search for More Books</Link>
                     </Row>
                    <Row>
                     <h2>Currently Reading</h2>
