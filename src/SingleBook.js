@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { Card, CardImg, CardBlock,
-    CardTitle, CardSubtitle } from 'reactstrap';
 import PropTypes from 'prop-types'
 import ShelfChangeButton from './ShelfChangeButton';
 
@@ -10,18 +8,17 @@ class SingleBook extends Component{
     }
     render() {
         return(
-            <Card>
-                <CardImg top width="100%" height="100%" src={this.props.bookInfo.imageLinks.smallThumbnail} alt="Card image cap" />
-                <CardBlock>
-                    <CardTitle>{this.props.bookInfo.title}</CardTitle>
-                    <CardSubtitle>
-                        { this.props.bookInfo.authors && (
+            <div className="card">
+                <img src={this.props.bookInfo.imageLinks.thumbnail} alt='book'/>
+                <div className="bookData">
+                    <p className='titleText'>{this.props.bookInfo.title}</p>
+                    <p className='authorText'>{ this.props.bookInfo.authors && (
                             <SingleAuthor authors={this.props.bookInfo.authors}/>
                         )}
-                    </CardSubtitle>
+                    </p>
                     <ShelfChangeButton shelfBooks={this.props.shelfBooks} onMoveBook={this.props.onMoveBook} bookInfo={this.props.bookInfo}/>
-                </CardBlock>
-            </Card>
+                </div>
+            </div>
         )
     }
 }
@@ -30,7 +27,7 @@ function SingleAuthor(props){
 
     let oneAuthor = props.authors[0];
     return(
-         <span>{oneAuthor}</span>
+         <span className="singleAuthorCS">{oneAuthor}</span>
     );
 
 }

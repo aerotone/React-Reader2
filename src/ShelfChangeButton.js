@@ -25,9 +25,8 @@ class ShelfChangeButton extends React.Component {
   render() {
     return (
     
-    <div className="book-shelf-changer">
-        <br/>
-        <select value={this.shelfCheck(this.props.shelfBooks, this.props.bookInfo)} 
+    <div className="shelfChangeBtnHolder">
+        <select className="selectButton" value={this.shelfCheck(this.props.shelfBooks, this.props.bookInfo)} 
     onChange={(event) => this.props.onMoveBook(this.props.bookInfo, event.target.value, this.props.shelfBooks, this.props.bookInfo)}>
         <option value="none" disabled>Move to...</option>
         <option value="currentlyReading">Currently Reading</option>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SingleBook from './SingleBook';
@@ -28,39 +27,38 @@ class SearchForBooks extends Component {
         return(
             <div>
                 <br/>
-                <Row>
-                    <Link to="/">Back</Link>
-                </Row>
+                <Link className='navLink' to="/">Back</Link>
                 <br/>
-                <Row>
+                <div>
                     <input 
-                        className=''
+                        className='navLink'
                         type='text'
-                        placeholder='Search Books'
+                        placeholder=' Search Books'
                         value={this.state.query}
                         onChange={(event) => this.updateQuery(event.target.value) }
                         />
-                </Row>
-                <Row>
-                    {(this.state.query !== '' && this.props.allBooks !== undefined && this.props.allBooks.length >= 0) && (
-                        <div>
-                            <h2>Displaying <span>{this.props.allBooks.length} </span>search results for<span> "{this.state.query}"</span></h2>
-                        </div>)
-                    }
-                </Row>
-                <Row>
-                    {this.state.query === '' &&
-                        (<div><br/><span>Type some text into the search input to begin...</span></div>)
-                    }
-                    {(this.state.query !== '' && this.props.allBooks !== undefined && this.props.allBooks.length >= 0) && (
-                        this.props.allBooks
-                        .map((book) => (
-                            <Col sm="3" key={book.id}>
-                                <SingleBook onMoveBook={this.props.onMoveBook} bookInfo={book} shelfBooks={this.props.shelfBooks}/>
-                            </Col>
-                        ))
-                    )}
-                </Row>
+                </div>
+
+                {(this.state.query !== '' && this.props.allBooks !== undefined && this.props.allBooks.length >= 0) && (
+                    <div>
+                        <h2>Displaying <span>{this.props.allBooks.length} </span>search results for<span> "{this.state.query}"</span></h2>
+                    </div>)
+                }
+
+                {this.state.query === '' &&
+                    (<div>
+                        <br/>
+                        <span>Type some text into the search input to begin...</span>
+                    </div>)
+                }
+                <div className="container">
+                {(this.state.query !== '' && this.props.allBooks !== undefined && this.props.allBooks.length >= 0) && (
+                    this.props.allBooks
+                    .map((book) => (
+                        <SingleBook onMoveBook={this.props.onMoveBook} bookInfo={book} shelfBooks={this.props.shelfBooks}/>
+                    ))
+                )}
+                </div>
             </div>
         )
     }

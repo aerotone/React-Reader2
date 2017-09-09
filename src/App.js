@@ -3,7 +3,6 @@ import { Route } from 'react-router-dom'
 import * as BooksAPI from './utils/BooksAPI';
 import ListBooks from './ListBooks';
 import SearchForBooks from './SearchForBooks';
-import { Container } from 'reactstrap';
 import './App.css';
 
 class App extends Component {
@@ -49,8 +48,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Container>
+      <div className="App wrapper">
         <Route exact path="/" render={() => (
             <ListBooks 
               shelfBooks={this.state.books} 
@@ -68,7 +66,6 @@ class App extends Component {
               }}
           />
           )}/>
-        </Container>
       </div>
     );
   }
